@@ -1,5 +1,6 @@
 package lt.techin;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.support.ui.Select;
@@ -13,25 +14,39 @@ public class MainTest extends BaseTest{
     void shoppingPage(String price, String discount){
 
         MainPage mainPage = new MainPage(driver);
+        ProductPage productPage = new ProductPage(driver);
 
         mainPage.firstProduct();
 
-        String firstProductRegularPrice = mainPage.getFirstProductRegularPrice();
+        String firstProductRegularPrice = productPage.getFirstProductRegularPrice();
         assertEquals(price, firstProductRegularPrice);
 
-        String firstProductDiscount = mainPage.getFirstProductDiscount();
+        String firstProductDiscount = productPage.getFirstProductDiscount();
         assertEquals(discount,firstProductDiscount);
 
-        mainPage.firstProductSize();
+        productPage.firstProductSize();
 
         mainPage.secondProduct();
 
-        String secondProductRegularPrice = mainPage.getSecondProductRegularPrice();
+        String secondProductRegularPrice = productPage.getSecondProductRegularPrice();
         assertEquals(price, secondProductRegularPrice);
 
-        String secondProductDiscount = mainPage.getFirstProductDiscount();
+        String secondProductDiscount = productPage.getFirstProductDiscount();
         assertEquals(discount,secondProductDiscount);
 
-        mainPage.secondProductSize();
+        productPage.secondProductSize();
     }
+
+    @Test
+    void mainPage(){
+        MainPage mainPage = new MainPage(driver);
+        CreateAccountPage createAccountPage = new CreateAccountPage(driver);
+
+        mainPage.signInButton();
+
+        createAccountPage.createAccountButton();
+
+
+    }
+
 }
